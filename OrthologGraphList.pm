@@ -162,10 +162,12 @@ sub AddEdge {
     my $vertex2 = shift;
     my $expressionWeight = shift;
     my $identWeight = shift;
+    my $codonFreqWeight = shift;
     
     my @arrWeights = ();
     push @arrWeights,$expressionWeight;
     push @arrWeights,$identWeight;
+    push @arrWeights,$codonFreqWeight;
     
     $self->LogAddingEdge($vertex1,$vertex2);
     $self->LogAddingEdge($vertex2,$vertex1);
@@ -298,7 +300,7 @@ sub RemoveEdgesWithWeightBelowTreshold
 {
     my $self = shift;
     my $treshold = shift;
-    my $isIdent = shift;
+    my $indexOfWeightType = shift;
     
     my $ptrArrVerexies = $self->GetVertexies();
     for(my $i = 0;$i <= $#$ptrArrVerexies;$i++)
@@ -314,7 +316,7 @@ sub RemoveEdgesWithWeightBelowTreshold
 	    die if(not exists $self->{"Edges"}->{"$currVertex2"}->{"$currVertex1"});
 	    next if($self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"} == -1);
 	    my $ptrArr = $self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"};
-	    my $weight = $ptrArr->[$isIdent];
+	    my $weight = $ptrArr->[$indexOfWeightType];
 	    if ($weight<$treshold) {
 		$self->LogRemovingEdge($currVertex1,$currVertex2);
 		$self->LogRemovingEdge($currVertex2,$currVertex1);
