@@ -57,32 +57,32 @@ sub LogAddingEdge()
     my $vertexFrom = shift;
     my $vertexTo = shift;
     
-    if (exists $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"}) {
-	
-	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 1) {
-	    die;
-	    #$self->{"addedEdge"} -= 1;
-	    #$self->{"addedRemoveEdge"} += 1;
-	    
-	}
-	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == -1) {
-	    $self->{"removeEdge"} -= 1;
-	    $self->{"addedRemoveEdge"} += 1;
-	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 2;
-	    
-	}
-	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 2) {
-	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 1;
-	    $self->{"addedEdge"} += 1;
-	    
-	}
-	
-    }
-    else
-    {
-	$self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 1;
-	$self->{"addedEdge"} += 1;
-    }
+#    if (exists $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"}) {
+#	
+#	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 1) {
+#	    #die;
+#	    #$self->{"addedEdge"} -= 1;
+#	    #$self->{"addedRemoveEdge"} += 1;
+#	    
+#	}
+#	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == -1) {
+#	    $self->{"removeEdge"} -= 1;
+#	    $self->{"addedRemoveEdge"} += 1;
+#	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 2;
+#	    
+#	}
+#	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 2) {
+#	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 1;
+#	    $self->{"addedEdge"} += 1;
+#	    
+#	}
+#	
+#    }
+#    else
+#    {
+#	$self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 1;
+#	$self->{"addedEdge"} += 1;
+#    }
     
     
 }
@@ -92,32 +92,32 @@ sub LogRemovingEdge()
     my $self = shift;
     my $vertexFrom = shift;
     my $vertexTo = shift;
-    if (exists $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"}) {
-	
-	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 1) {
-	    $self->{"addedEdge"} -= 1;
-	    $self->{"addedRemoveEdge"} += 1;
-	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 2;
-	    
-	}
-	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == -1) {
-	    die;
-	    #$self->{"removeEdge"} -= 1;
-	    #$self->{"addedRemoveEdge"} += 1;
-	    
-	}
-	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 2) {
-	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = -1;
-	    $self->{"removeEdge"} += 1;
-	    
-	}
-	
-    }
-    else
-    {
-	$self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = -1;
-	$self->{"removeEdge"} += 1;
-    }
+#    if (exists $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"}) {
+#	
+#	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 1) {
+#	    $self->{"addedEdge"} -= 1;
+#	    $self->{"addedRemoveEdge"} += 1;
+#	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = 2;
+#	    
+#	}
+#	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == -1) {
+#	    die;
+#	    #$self->{"removeEdge"} -= 1;
+#	    #$self->{"addedRemoveEdge"} += 1;
+#	    
+#	}
+#	if ($self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} == 2) {
+#	    $self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = -1;
+#	    $self->{"removeEdge"} += 1;
+#	    
+#	}
+#	
+#    }
+#    else
+#    {
+#	$self->{"edgeStateStore"}->{"$vertexFrom\t$vertexTo"} = -1;
+#	$self->{"removeEdge"} += 1;
+#    }
     
     
 }
@@ -168,6 +168,7 @@ sub AddEdge {
     push @arrWeights,$expressionWeight;
     push @arrWeights,$identWeight;
     push @arrWeights,$codonFreqWeight;
+    
     
     $self->LogAddingEdge($vertex1,$vertex2);
     $self->LogAddingEdge($vertex2,$vertex1);
@@ -576,7 +577,8 @@ sub GetListOfVertexiesInConnectedComponent
     my $ptrArrList = shift;
     
     my $ptrConToVertexList = $self->GetAllVertexesConnectedToVertex($vertex);
-    
+    print "$vertex\n";
+    return if($#$ptrConToVertexList == -1);
     for(my $i = 0;$i <= $#$ptrConToVertexList;$i++)
     {
 	my $currVertex = $ptrConToVertexList->[$i];
@@ -657,7 +659,8 @@ sub PrintOrthogroupInFile
     my $indexOfWeightType = shift;
     my $ptrEdgesVisited = shift;
     my $outFile = shift;
-    
+    my $ptrTrivialNames = shift;
+    #print "$outFile\n";
     
     
     my $ptrConToVertexList = $self->GetAllVertexesConnectedToVertex($vertex);
@@ -673,18 +676,40 @@ sub PrintOrthogroupInFile
 	
 	my $ptrArrWeights = $self->GetEdgeWeight($vertex,$currVertex);
 	
-	my $weightVal = $ptrArrWeights->[$indexOfWeightType];
+	
+	my $weightValCodonFreq = sprintf("%.2f",$ptrArrWeights->[2]);
+	my $weightValIdent = sprintf("%.2f",$ptrArrWeights->[1]);
+	my $weightValPred = sprintf("%.2f",$ptrArrWeights->[0]);
 	
 	$ptrEdgesVisited->{"$vertex\t$currVertex"} = 1;
 	$ptrEdgesVisited->{"$currVertex\t$vertex"} = 1;
-    	open(FTW,">>graphviz/$outFile") or die;
-	print FTW "$vertex -- $currVertex [label=\"$weightVal\"];\n";
+    	open(FTW,">>$outFile") or die("$outFile");
+	
+	my $vertexToPrint = $vertex;
+	my $currVertexToPrint = $currVertex;
+	
+	if (substr($vertexToPrint,0,2) eq "AT") {
+	    my $trivNam = $vertexToPrint;
+	    if (exists $ptrTrivialNames->{"$vertexToPrint"}) {
+		$trivNam = $ptrTrivialNames->{"$vertexToPrint"};
+	    }
+	    $vertexToPrint = "$vertexToPrint\_$trivNam";
+	}
+	if (substr($currVertexToPrint,0,2) eq "AT") {
+	    my $trivNam = $currVertexToPrint;
+	    if (exists $ptrTrivialNames->{"$currVertexToPrint"}) {
+		$trivNam = $ptrTrivialNames->{"$currVertexToPrint"};
+	    }
+	    $currVertexToPrint = "$currVertexToPrint\_$trivNam";
+	}
+	
+	print FTW "$vertexToPrint -- $currVertexToPrint [label=\"$weightValPred;$weightValIdent;$weightValCodonFreq\"];\n";
 	close(FTW);
 	next if(exists $ptrVisited->{"$currVertex"});
 	$ptrVisited->{"$currVertex"} = 1;
 	
 	
-	$self->PrintOrthogroupInFile($currVertex,$ptrVisited,$indexOfWeightType,$ptrEdgesVisited,$outFile);
+	$self->PrintOrthogroupInFile($currVertex,$ptrVisited,$indexOfWeightType,$ptrEdgesVisited,$outFile,$ptrTrivialNames);
 	
     }
     
@@ -753,8 +778,6 @@ sub InitalizePredictTable
 sub RemoveEdgesWithWeightByPredictionTable
 {
     my $self = shift;
-    my $tresholdFirst = shift;
-    my $tresholdSecond = shift;
     
     
     my $ptrArrVerexies = $self->GetVertexies();
@@ -771,7 +794,7 @@ sub RemoveEdgesWithWeightByPredictionTable
 	    die if(not exists $self->{"Edges"}->{"$currVertex2"}->{"$currVertex1"});
 	    next if($self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"} == -1);
 	    my $ptrArr = $self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"};
-	    my $weightFirst = $ptrArr->[1];
+	    my $weightFirst = $ptrArr->[0];
 	    my $weightSecond = $ptrArr->[2];
 	    if (not exists $self->{"PredictionTable"}->{"$weightFirst\t$weightSecond"}) {
 		die;
@@ -788,6 +811,7 @@ sub RemoveEdgesWithWeightByPredictionTable
 	}
     }
 }
+
 
 
 1;
