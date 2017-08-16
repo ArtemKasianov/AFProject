@@ -719,6 +719,75 @@ sub IsFescGene
 }
 
 
+sub InitalizePredictTable
+{
+    my $self = shift;
+    my $fileName = shift;
+    
+    my %predictTable = ();
+    
+    open(FTR,"<$fileName") or die;
+    
+    while (my $input = <FTR>) {
+	chomp($input);
+	
+	my @arrInp = split(/\t/,$input);
+	
+	my $expressionVal = $arrInp[0];
+	my $codonFreqVal = $arrInp[1];
+	my $predictionVal = $arrInp[2];
+	
+	$predictTable{"$expressionVal\t$codonFreqVal"}=$predictionVal;
+	
+    }
+    
+    $self->{"PredictionTable"} = \%predictTable;
+    
+    
+    
+    
+    close(FTR);
+}
+
+
+sub RemoveEdgesWithWeightByPredictionTable
+{
+    my $self = shift;
+    my $tresholdFirst = shift;
+    my $tresholdSecond = shift;
+    
+    
+    my $ptrArrVerexies = $self->GetVertexies();
+    for(my $i = 0;$i <= $#$ptrArrVerexies;$i++)
+    {
+	my $currVertex1 = $ptrArrVerexies->[$i];
+	my $ptrArrVertexies2 = $self->GetAllVertexesConnectedToVertex($currVertex1);
+	next if($ptrArrVertexies2 == -1);
+	for(my $j = 0;$j <= $#$ptrArrVertexies2;$j++)
+	{
+	    my $currVertex2 = $ptrArrVertexies2->[$j];
+	    
+	    die if(not exists $self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"});
+	    die if(not exists $self->{"Edges"}->{"$currVertex2"}->{"$currVertex1"});
+	    next if($self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"} == -1);
+	    my $ptrArr = $self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"};
+	    my $weightFirst = $ptrArr->[1];
+	    my $weightSecond = $ptrArr->[2];
+	    if (not exists $self->{"PredictionTable"}->{"$weightFirst\t$weightSecond"}) {
+		die;
+	    }
+	    
+	    my $isNotCut = $self->{"PredictionTable"}->{"$weightFirst\t$weightSecond"};
+	    
+	    if ($isNotCut == 0) {
+		$self->LogRemovingEdge($currVertex1,$currVertex2);
+		$self->LogRemovingEdge($currVertex2,$currVertex1);
+		$self->{"Edges"}->{"$currVertex1"}->{"$currVertex2"} = -1;
+		$self->{"Edges"}->{"$currVertex2"}->{"$currVertex1"} = -1;
+	    }
+	}
+    }
+}
 
 
 1;
