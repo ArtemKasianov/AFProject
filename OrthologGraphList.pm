@@ -457,7 +457,7 @@ sub GetArrOfWeightsInConnectedComponent
     my $self = shift;
     my $vertex = shift;
     my $ptrArrWeights = shift;
-    my $isIdent = shift;
+    my $indexOfWeightType = shift;
     my $ptrArrVisited = shift;
     my $ptrArrEdgesVisited = shift;
     
@@ -477,7 +477,7 @@ sub GetArrOfWeightsInConnectedComponent
 	
 	my $ptrArrCurrWeights = $self->GetEdgeWeight($vertex,$currVertex);
 	
-	my $weightVal = $ptrArrCurrWeights->[$isIdent];
+	my $weightVal = $ptrArrCurrWeights->[$indexOfWeightType];
 	push @$ptrArrWeights,$weightVal;
 	$ptrArrEdgesVisited->{"$vertex\t$currVertex"} = 1;
 	$ptrArrEdgesVisited->{"$currVertex\t$vertex"} = 1;
@@ -485,7 +485,7 @@ sub GetArrOfWeightsInConnectedComponent
 	next if(exists $ptrArrVisited->{"$currVertex"});
 	$ptrArrVisited->{"$currVertex"} = 1;
 	
-	$self->GetArrOfWeightsInConnectedComponent($currVertex,$ptrArrWeights,$isIdent,$ptrArrVisited,$ptrArrEdgesVisited);
+	$self->GetArrOfWeightsInConnectedComponent($currVertex,$ptrArrWeights,$indexOfWeightType,$ptrArrVisited,$ptrArrEdgesVisited);
 	
 	
 	
@@ -498,7 +498,7 @@ sub GetMedianOfWeightsInConnectedComponent
 {
     my $self = shift;
     my $vertex = shift;
-    my $isIdent = shift;
+    my $indexOfWeightType = shift;
     my $ptrVisited = shift;
     
     #my %visited = ();
@@ -507,7 +507,7 @@ sub GetMedianOfWeightsInConnectedComponent
     
     my @arrWeights = ();
     
-    $self->GetArrOfWeightsInConnectedComponent($vertex,\@arrWeights,$isIdent,$ptrVisited,\%edgesVisited);
+    $self->GetArrOfWeightsInConnectedComponent($vertex,\@arrWeights,$indexOfWeightType,$ptrVisited,\%edgesVisited);
     my $countTmp = $#arrWeights+1;
     my @sortArrWeights = sort {$a <=> $b} @arrWeights;
     
@@ -533,7 +533,7 @@ sub GetMeanOfWeightsInConnectedComponent
 {
     my $self = shift;
     my $vertex = shift;
-    my $isIdent = shift;
+    my $indexOfWeightType = shift;
     my $ptrVisited = shift;
     
     #my %visited = ();
@@ -542,7 +542,7 @@ sub GetMeanOfWeightsInConnectedComponent
     
     my @arrWeights = ();
     
-    $self->GetArrOfWeightsInConnectedComponent($vertex,\@arrWeights,$isIdent,$ptrVisited,\%edgesVisited);
+    $self->GetArrOfWeightsInConnectedComponent($vertex,\@arrWeights,$indexOfWeightType,$ptrVisited,\%edgesVisited);
     my $countTmp = $#arrWeights+1;
     #my @sortArrWeights = sort {$a <=> $b} @arrWeights;
     
@@ -606,7 +606,7 @@ sub RemoveEdgeWithWeightsBelowTresholdInConnectedComponent
     my $self = shift;
     my $vertex = shift;
     my $weightTreshold = shift;
-    my $isIdent = shift;
+    my $indexOfWeightType = shift;
     my $ptrArrVisited = shift;
     my $ptrArrEdgesVisited = shift;
     
@@ -628,7 +628,7 @@ sub RemoveEdgeWithWeightsBelowTresholdInConnectedComponent
 	
 	my $ptrArrWeights = $self->GetEdgeWeight($vertex,$currVertex);
 	
-	my $weightVal = $ptrArrWeights->[$isIdent];
+	my $weightVal = $ptrArrWeights->[$indexOfWeightType];
 	
 	
 	if ($weightVal < $weightTreshold) {
@@ -640,7 +640,7 @@ sub RemoveEdgeWithWeightsBelowTresholdInConnectedComponent
 	
 	next if(exists $ptrArrVisited->{"$currVertex"});
 	$ptrArrVisited->{"$currVertex"} = 1;
-	$self->RemoveEdgeWithWeightsBelowTresholdInConnectedComponent($vertex,$weightTreshold,$isIdent,$ptrArrVisited);
+	$self->RemoveEdgeWithWeightsBelowTresholdInConnectedComponent($vertex,$weightTreshold,$indexOfWeightType,$ptrArrVisited);
 	
 	
 	
@@ -654,7 +654,7 @@ sub PrintOrthogroupInFile
     my $self = shift;
     my $vertex = shift;
     my $ptrVisited = shift;
-    my $isIdent = shift;
+    my $indexOfWeightType = shift;
     my $ptrEdgesVisited = shift;
     my $outFile = shift;
     
@@ -673,7 +673,7 @@ sub PrintOrthogroupInFile
 	
 	my $ptrArrWeights = $self->GetEdgeWeight($vertex,$currVertex);
 	
-	my $weightVal = $ptrArrWeights->[$isIdent];
+	my $weightVal = $ptrArrWeights->[$indexOfWeightType];
 	
 	$ptrEdgesVisited->{"$vertex\t$currVertex"} = 1;
 	$ptrEdgesVisited->{"$currVertex\t$vertex"} = 1;
@@ -684,7 +684,7 @@ sub PrintOrthogroupInFile
 	$ptrVisited->{"$currVertex"} = 1;
 	
 	
-	$self->PrintOrthogroupInFile($currVertex,$ptrVisited,$isIdent,$ptrEdgesVisited,$outFile);
+	$self->PrintOrthogroupInFile($currVertex,$ptrVisited,$indexOfWeightType,$ptrEdgesVisited,$outFile);
 	
     }
     
