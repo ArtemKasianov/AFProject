@@ -577,7 +577,6 @@ sub GetListOfVertexiesInConnectedComponent
     my $ptrArrList = shift;
     
     my $ptrConToVertexList = $self->GetAllVertexesConnectedToVertex($vertex);
-    print "$vertex\n";
     return if($#$ptrConToVertexList == -1);
     for(my $i = 0;$i <= $#$ptrConToVertexList;$i++)
     {
@@ -585,6 +584,7 @@ sub GetListOfVertexiesInConnectedComponent
 	
 	next if(exists $ptrArrVisited->{"$currVertex"});
 	next if($self->{"Edges"}->{"$vertex"}->{"$currVertex"} == -1);
+	next if($self->{"Edges"}->{"$currVertex"}->{"$vertex"} == -1);
 	#die if(not exists $self->{"Edges"}->{"$vertex"}->{"$currVertex"});
 	#die if(not exists $self->{"Edges"}->{"$currVertex"}->{"$vertex"});
 	
@@ -668,10 +668,19 @@ sub PrintOrthogroupInFile
     for(my $i = 0;$i <= $#$ptrConToVertexList;$i++)
     {
 	my $currVertex = $ptrConToVertexList->[$i];
-	
+	if ($vertex eq "AT3G50840") {
+	    print "AT3G50840\t$currVertex\n";
+	}
+	if ($currVertex eq "AT3G50840") {
+	    print "AT3G50840\t$vertex\n";
+	}
 	next if($self->{"Edges"}->{"$vertex"}->{"$currVertex"} == -1);
 	
 	next if(exists $ptrEdgesVisited->{"$vertex\t$currVertex"});
+	
+	
+	
+	
 	next if(exists $ptrEdgesVisited->{"$currVertex\t$vertex"});
 	
 	my $ptrArrWeights = $self->GetEdgeWeight($vertex,$currVertex);
@@ -752,7 +761,6 @@ sub InitalizePredictTable
     my %predictTable = ();
     
     open(FTR,"<$fileName") or die;
-    
     while (my $input = <FTR>) {
 	chomp($input);
 	
@@ -797,7 +805,7 @@ sub RemoveEdgesWithWeightByPredictionTable
 	    my $weightFirst = $ptrArr->[0];
 	    my $weightSecond = $ptrArr->[2];
 	    if (not exists $self->{"PredictionTable"}->{"$weightFirst\t$weightSecond"}) {
-		die;
+		die("$weightFirst\t$weightSecond");
 	    }
 	    
 	    my $isNotCut = $self->{"PredictionTable"}->{"$weightFirst\t$weightSecond"};

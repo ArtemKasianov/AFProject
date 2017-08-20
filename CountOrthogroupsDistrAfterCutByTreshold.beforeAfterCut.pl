@@ -6,6 +6,10 @@ my $identFile = $ARGV[0];
 my $predictExpressionFile = $ARGV[1];
 my $predictCodonFreqFile = $ARGV[2];
 my $trivialNamesFile = $ARGV[3];
+my $outBeforeFile = $ARGV[4];
+my $outAfterFile = $ARGV[5];
+
+
 
 
 
@@ -19,6 +23,10 @@ my %allFescHash = ();
 
 
 my %trivialNames = ();
+
+my %distrOtrhogroupsBeforeSizes = ();
+my %distrOtrhogroupsAfterSizes = ();
+
 
 
 open(FTR,"<$trivialNamesFile") or die;
@@ -128,9 +136,9 @@ my $orthologGraph = OrthologGraphList->new();
 for(my $i = 0;$i <= $#allAth;$i++)
 {
     my $currAth = $allAth[$i];
-    for(my $i = 0;$i <= $#allFesc;$i++)
+    for(my $j = 0;$j <= $#allFesc;$j++)
     {
-	my $currFesc = $allFesc[$i];
+	my $currFesc = $allFesc[$j];
 	
 	
 	next if(not exists $predictExpressionPairs{"$currAth\t$currFesc"});
@@ -151,34 +159,34 @@ my %hashEdgesVisited = ();
 my $numOrtho = 0;
 my @arrGenesSingletons = ();
 
-mkdir("graphviz");
+
 for(my $i = 0;$i <= $#allAth;$i++ )
 {
-    my $currAth = $allAth[$i];
-    print "$currAth\n";
-    next if(exists $hashVisited{"$currAth"});
+    my $currAthFirst = $allAth[$i];
+    #print "$currAthFirst\n";
+    next if(exists $hashVisited{"$currAthFirst"});
     
-    $hashVisited{"$currAth"} = 1;
+    $hashVisited{"$currAthFirst"} = 1;
     
     my %tempVisitedHash = ();
     my @arrVertexies = ();
-    push @arrVertexies,$currAth;
-    $orthologGraph->GetListOfVertexiesInConnectedComponent($currAth,\%tempVisitedHash,\@arrVertexies);
+    push @arrVertexies,$currAthFirst;
+    $orthologGraph->GetListOfVertexiesInConnectedComponent($currAthFirst,\%hashVisited,\@arrVertexies);
     if ($#arrVertexies == 0) {
 	my $singletonVertex = $arrVertexies[0];
-	die if($singletonVertex ne $currAth);
+	die if($singletonVertex ne $currAthFirst);
 	push @arrGenesSingletons,$singletonVertex;
+	$distrOtrhogroupsBeforeSizes{1} += 1;
 	next;
     }
-    mkdir("graphviz/$numOrtho");
-    open(FTW,">graphviz/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz") or die;
-    print FTW "graph G {\n";
-    close(FTW);
-    $orthologGraph->PrintOrthogroupInFile("$currAth",\%hashVisited,0,\%hashEdgesVisited,"graphviz/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz",\%trivialNames);
-    open(FTW,">>graphviz/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz") or die;
-    print FTW "}\n";
-    
-    close(FTW);
+
+    if (exists $distrOtrhogroupsBeforeSizes{($#arrVertexies+1)}) {
+	$distrOtrhogroupsBeforeSizes{($#arrVertexies+1)} = $distrOtrhogroupsBeforeSizes{($#arrVertexies+1)} + 1;
+    }
+    else
+    {
+	$distrOtrhogroupsBeforeSizes{($#arrVertexies+1)} = 1;
+    }
     
     
     my $orthoGroupObj = OrthologousGroups->new();
@@ -197,9 +205,9 @@ for(my $i = 0;$i <= $#allAth;$i++ )
     for(my $i = 0;$i <= $#$ptrAthArr;$i++)
     {
 	my $currAth = $ptrAthArr->[$i];
-	for(my $i = 0;$i <= $#$ptrFescArr;$i++)
+	for(my $j = 0;$j <= $#$ptrFescArr;$j++)
 	{
-	    my $currFesc = $ptrFescArr->[$i];
+	    my $currFesc = $ptrFescArr->[$j];
 	    
 	    
 	    next if(not exists $predictExpressionPairs{"$currAth\t$currFesc"});
@@ -230,127 +238,69 @@ for(my $i = 0;$i <= $#allAth;$i++ )
 	my $currAth = $ptrAthArr->[$i];
 	
 	next if(exists $hashVisitedIn{"$currAth"});
+	$hashVisitedIn{"$currAth"} = 1;
 	%tempVisitedHash = ();
 	@arrVertexies = ();
 	
 	push @arrVertexies,$currAth;
-	$orthologGraph->GetListOfVertexiesInConnectedComponent($currAth,\%tempVisitedHash,\@arrVertexies);
+	$orthologGraphIn->GetListOfVertexiesInConnectedComponent($currAth,\%hashVisitedIn,\@arrVertexies);
 	if ($#arrVertexies == 0) {
 	    my $singletonVertex = $arrVertexies[0];
 	    die if($singletonVertex ne $currAth);
 	    push @arrGenesSingletonsIn,$singletonVertex;
+	    $distrOtrhogroupsAfterSizes{1} += 1;
 	    next;
 	}
-	open(FTW,">graphviz/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz") or die;
-	print FTW "graph G {\n";
-	close(FTW);
-	$orthologGraph->PrintOrthogroupInFile("$currAth",\%hashVisitedIn,0,\%hashEdgesVisitedIn,"graphviz/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz",\%trivialNames);
-	open(FTW,">>graphviz/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz") or die;
-	print FTW "}\n";
-	$indexCutOrthoGroup++;
-	close(FTW);
+	
+	if ($numOrtho == 883) {
+	    if ($indexCutOrthoGroup == 2) {
+		print "arrVertexies - $#arrVertexies\n";
+	    }
+	    
+	}
+	
+	
+	if (exists $distrOtrhogroupsAfterSizes{($#arrVertexies+1)}) {
+	    $distrOtrhogroupsAfterSizes{($#arrVertexies+1)} = $distrOtrhogroupsAfterSizes{($#arrVertexies+1)} + 1;
+	}
+	else
+	{
+	    $distrOtrhogroupsAfterSizes{($#arrVertexies+1)} = 1;
+	}
     }
     
     for(my $i = 0;$i <= $#$ptrFescArr;$i++)
     {
-	my $currAth = $ptrFescArr->[$i];
+	my $currFesc = $ptrFescArr->[$i];
 	
-	next if(exists $hashVisitedIn{"$currAth"});
+	next if(exists $hashVisitedIn{"$currFesc"});
+	$hashVisitedIn{"$currFesc"} = 1;
 	%tempVisitedHash = ();
 	@arrVertexies = ();
 	
-	push @arrVertexies,$currAth;
-	$orthologGraph->GetListOfVertexiesInConnectedComponent($currAth,\%tempVisitedHash,\@arrVertexies);
+	push @arrVertexies,$currFesc;
+	$orthologGraphIn->GetListOfVertexiesInConnectedComponent($currFesc,\%hashVisitedIn,\@arrVertexies);
 	if ($#arrVertexies == 0) {
 	    my $singletonVertex = $arrVertexies[0];
-	    die if($singletonVertex ne $currAth);
+	    die if($singletonVertex ne $currFesc);
 	    push @arrGenesSingletonsIn,$singletonVertex;
+	    $distrOtrhogroupsAfterSizes{1} += 1;
 	    next;
 	}
 	
 	die;
-	#open(FTW,">graphviz/$numOrtho/afterCut.$indexCutOrthoGroup.orthogroup.graphviz") or die;
-	#print FTW "graph G {\n";
-	#close(FTW);
-	#$orthologGraph->PrintOrthogroupInFile("$currAth",\%hashVisitedIn,0,\%hashEdgesVisitedIn,"graphviz/$numOrtho/afterCut.$indexCutOrthoGroup.orthogroup.graphviz",\%trivialNames);
-	#open(FTW,">>graphviz/$numOrtho/afterCut.$indexCutOrthoGroup.orthogroup.graphviz") or die;
-	#print FTW "}\n";
-	#$indexCutOrthoGroup++;
-	#close(FTW);
     }
-    if ($#arrGenesSingletonsIn > -1) {
-	open(FTW,">graphviz/$numOrtho/orthogoroup.$numOrtho.singletons.txt") or die;
-	
-	for(my $i = 0;$i <= $#arrGenesSingletonsIn;$i++)
-	{
-	    my $currGeneSingleton = $arrGenesSingletonsIn[$i];
-	    
-	    
-	    if (substr($currGeneSingleton,0,2) eq "AT") {
-		my $trivNam = $currGeneSingleton;
-		if (exists $trivialNames{"$currGeneSingleton"}) {
-		    $trivNam = $trivialNames{"$currGeneSingleton"};
-		}
-		$currGeneSingleton = "$currGeneSingleton\_$trivNam";
-	    }
-	    
-	    
-	    print FTW "$currGeneSingleton\n";
-	}
-	
-	close(FTW);
-    }
+    
 	
     $numOrtho++;
     
 
 }
 
-
-$orthologGraph->InitalizePredictTable("predict.table");
-$orthologGraph->RemoveEdgesWithWeightByPredictionTable();
-
-
-
-
-my %hashVisited = ();
-my %hashEdgesVisited = ();
-my $numOrtho = 0;
-my @arrGenesSingletons = ();
-for(my $i = 0;$i <= $#allAth;$i++ )
-{
-    my $currAth = $allAth[$i];
-    print "$currAth\n";
-    next if(exists $hashVisited{"$currAth"});
-    
-    $hashVisited{"$currAth"} = 1;
-    
-    my %tempVisitedHash = ();
-    my @arrVertexies = ();
-    push @arrVertexies,$currAth;
-    $orthologGraph->GetListOfVertexiesInConnectedComponent($currAth,\%tempVisitedHash,\@arrVertexies);
-    if ($#arrVertexies == 0) {
-	my $singletonVertex = $arrVertexies[0];
-	die if($singletonVertex ne $currAth);
-	push @arrGenesSingletons,$singletonVertex;
-	next;
-    }
-    
-    
-    
-    open(FTW,">graphviz/$numOrtho.orthogroup.graphviz") or die;
-    print FTW "graph G {\n";
-    close(FTW);
-    $orthologGraph->PrintOrthogroupInFile("$currAth",\%hashVisited,0,\%hashEdgesVisited,"graphviz/$numOrtho.orthogroup.graphviz",\%trivialNames);
-    open(FTW,">>graphviz/$numOrtho.orthogroup.graphviz") or die;
-    print FTW "}\n";
-    
-    close(FTW);
-    $numOrtho++;
-}
 for(my $i = 0;$i <= $#allFesc;$i++ )
 {
     my $currFesc = $allFesc[$i];
+    #print "$currFesc\n";
     next if(exists $hashVisited{"$currFesc"});
     
     $hashVisited{"$currFesc"} = 1;
@@ -358,47 +308,47 @@ for(my $i = 0;$i <= $#allFesc;$i++ )
     my %tempVisitedHash = ();
     my @arrVertexies = ();
     push @arrVertexies,$currFesc;
-    $orthologGraph->GetListOfVertexiesInConnectedComponent($currFesc,\%tempVisitedHash,\@arrVertexies);
+    $orthologGraph->GetListOfVertexiesInConnectedComponent($currFesc,\%hashVisited,\@arrVertexies);
     if ($#arrVertexies == 0) {
 	my $singletonVertex = $arrVertexies[0];
 	die if($singletonVertex ne $currFesc);
 	push @arrGenesSingletons,$singletonVertex;
+	$distrOtrhogroupsBeforeSizes{1} += 1;
 	next;
     }
-    
-    
-    open(FTW,">graphviz/$numOrtho.orthogroup.graphviz") or die;
-    print FTW "graph G {\n";
-    close(FTW);
-    $orthologGraph->PrintOrthogroupInFile("$currFesc",\%hashVisited,0,\%hashEdgesVisited,"graphviz/$numOrtho.orthogroup.graphviz",\%trivialNames);
-    open(FTW,">>graphviz/$numOrtho.orthogroup.graphviz") or die;
-    print FTW "}\n";
-    
-    close(FTW);
-    $numOrtho++;
+    die;
 }
 
-if ($#arrGenesSingletons > -1) {
-    open(FTW,">graphviz/singletons.txt") or die;
-    
-    for(my $i = 0;$i <= $#arrGenesSingletons;$i++)
-    {
-	my $currGeneSingleton = $arrGenesSingletons[$i];
-	
-	
-	if (substr($currGeneSingleton,0,2) eq "AT") {
-	    my $trivNam = $currGeneSingleton;
-	    if (exists $trivialNames{"$currGeneSingleton"}) {
-		$trivNam = $trivialNames{"$currGeneSingleton"};
-	    }
-	    $currGeneSingleton = "$currGeneSingleton\_$trivNam";
-	}
-	
-	
-	print FTW "$currGeneSingleton\n";
-    }
-    
-    close(FTW);
+open(FTW_B,">$outBeforeFile") or die;
+
+my @arrSizes = sort {$a <=> $b} keys %distrOtrhogroupsBeforeSizes;
+
+for(my $i = 0;$i <= $#arrSizes;$i++)
+{
+    my $currSize = $arrSizes[$i];
+    my $currCount = $distrOtrhogroupsBeforeSizes{$currSize};
+    print FTW_B "$currSize\t$currCount\n";
 }
+
+
+
+close(FTW_B);
+
+
+open(FTW_A,">$outAfterFile") or die;
+
+@arrSizes = sort {$a <=> $b} keys %distrOtrhogroupsAfterSizes;
+
+for(my $i = 0;$i <= $#arrSizes;$i++)
+{
+    my $currSize = $arrSizes[$i];
+    my $currCount = $distrOtrhogroupsAfterSizes{$currSize};
+    print FTW_A "$currSize\t$currCount\n";
+}
+
+
+
+close(FTW_A);
+
 
 
