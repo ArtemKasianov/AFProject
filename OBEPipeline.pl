@@ -206,4 +206,9 @@ for(my $j = 0;$j <= 9;$j++)
 
 system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile others.pairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.pairs");
 system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.pairs results_treshold_$identTreshold/training/codonFreq/folds_all/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/others.codonFreq.predictions");
+$strCat = "cat";
 
+for(my $j = 0;$j <= 9;$j++)
+{
+    $strCat = $strCat." results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.codonFreq.predictions";
+}
