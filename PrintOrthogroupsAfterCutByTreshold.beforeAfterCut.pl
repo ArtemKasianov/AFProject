@@ -6,6 +6,7 @@ my $identFile = $ARGV[0];
 my $predictExpressionFile = $ARGV[1];
 my $predictCodonFreqFile = $ARGV[2];
 my $trivialNamesFile = $ARGV[3];
+my $outDir = $ARGV[4];
 
 
 
@@ -170,12 +171,12 @@ for(my $i = 0;$i <= $#allAth;$i++ )
 	push @arrGenesSingletons,$singletonVertex;
 	next;
     }
-    mkdir("graphviz/$numOrtho");
-    open(FTW,">graphviz/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz") or die;
+    mkdir("$outDir/$numOrtho");
+    open(FTW,">$outDir/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz") or die;
     print FTW "graph G {\n";
     close(FTW);
-    $orthologGraph->PrintOrthogroupInFile("$currAthFirst",\%hashVisited,0,\%hashEdgesVisited,"graphviz/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz",\%trivialNames);
-    open(FTW,">>graphviz/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz") or die;
+    $orthologGraph->PrintOrthogroupInFile("$currAthFirst",\%hashVisited,0,\%hashEdgesVisited,"$outDir/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz",\%trivialNames);
+    open(FTW,">>$outDir/$numOrtho/beforeCut.orthogroup.$numOrtho.graphviz") or die;
     print FTW "}\n";
     
     close(FTW);
@@ -257,11 +258,11 @@ for(my $i = 0;$i <= $#allAth;$i++ )
 	}
 	
 	
-	open(FTW,">graphviz/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz") or die;
+	open(FTW,">$outDir/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz") or die;
 	print FTW "graph G {\n";
 	close(FTW);
-	$orthologGraphIn->PrintOrthogroupInFile("$currAth",\%hashVisitedIn,0,\%hashEdgesVisitedIn,"graphviz/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz",\%trivialNames);
-	open(FTW,">>graphviz/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz") or die;
+	$orthologGraphIn->PrintOrthogroupInFile("$currAth",\%hashVisitedIn,0,\%hashEdgesVisitedIn,"$outDir/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz",\%trivialNames);
+	open(FTW,">>$outDir/$numOrtho/afterCut.orthogoroup.$numOrtho.$indexCutOrthoGroup.graphviz") or die;
 	print FTW "}\n";
 	$indexCutOrthoGroup++;
 	close(FTW);
@@ -288,7 +289,7 @@ for(my $i = 0;$i <= $#allAth;$i++ )
 	die;
     }
     if ($#arrGenesSingletonsIn > -1) {
-	open(FTW,">graphviz/$numOrtho/orthogoroup.$numOrtho.singletons.txt") or die;
+	open(FTW,">$outDir/$numOrtho/orthogoroup.$numOrtho.singletons.txt") or die;
 	
 	for(my $i = 0;$i <= $#arrGenesSingletonsIn;$i++)
 	{
@@ -337,7 +338,7 @@ for(my $i = 0;$i <= $#allFesc;$i++ )
 }
 
 if ($#arrGenesSingletons > -1) {
-    open(FTW,">graphviz/singletons.txt") or die;
+    open(FTW,">$outDir/singletons.txt") or die;
     
     for(my $i = 0;$i <= $#arrGenesSingletons;$i++)
     {
