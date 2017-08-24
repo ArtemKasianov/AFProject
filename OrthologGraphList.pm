@@ -577,6 +577,7 @@ sub GetListOfVertexiesInConnectedComponent
     my $ptrArrList = shift;
     
     my $ptrConToVertexList = $self->GetAllVertexesConnectedToVertex($vertex);
+    return if($ptrConToVertexList == -1);
     return if($#$ptrConToVertexList == -1);
     for(my $i = 0;$i <= $#$ptrConToVertexList;$i++)
     {

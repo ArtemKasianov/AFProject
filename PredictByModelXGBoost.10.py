@@ -17,7 +17,6 @@ f = open(pairGenesFile,"r")
 for line in f:
     line = line.strip('\n')
     pairsOfGenesArr.append(line)
-print(str(len(pairsOfGenesArr)))
 
 dval = xgb.DMatrix(svmFile)
 bst = xgb.Booster({'nthread':20}) #init model

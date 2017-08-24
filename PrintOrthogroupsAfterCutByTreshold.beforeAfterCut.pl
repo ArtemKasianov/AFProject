@@ -7,6 +7,7 @@ my $predictExpressionFile = $ARGV[1];
 my $predictCodonFreqFile = $ARGV[2];
 my $trivialNamesFile = $ARGV[3];
 my $outDir = $ARGV[4];
+my $predictFile = $ARGV[5];
 
 
 
@@ -152,7 +153,6 @@ my %hashEdgesVisited = ();
 my $numOrtho = 0;
 my @arrGenesSingletons = ();
 
-mkdir("graphviz");
 for(my $i = 0;$i <= $#allAth;$i++ )
 {
     my $currAthFirst = $allAth[$i];
@@ -215,7 +215,7 @@ for(my $i = 0;$i <= $#allAth;$i++ )
 	    
 	}
     }
-    $orthologGraphIn->InitalizePredictTable("predict.table");
+    $orthologGraphIn->InitalizePredictTable("$predictFile");
     $orthologGraphIn->RemoveEdgesWithWeightByPredictionTable();
     
     

@@ -1,0 +1,13 @@
+#!/bin/bash
+#PBS -l walltime=999:00:00,mem=20gb
+#PBS -l nodes=1:ppn=20
+#PBS -d .
+
+
+python svm-pipe-part1.iter.py /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/positive.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/negative.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/treshold.100_1.table 100 1
+python svm-pipe-part1.iter.py /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/positive.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/negative.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/treshold.1000_1.table 1000 1
+python svm-pipe-part1.iter.py /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/positive.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/negative.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/treshold.10000_1.table 10000 1
+python svm-pipe-part1.iter.py /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/positive.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/negative.expressionCodonFreq.predictions /mnt/lustre/kasianov/Projects/ArabFagop/newProtocol/diffTresholds/results_treshold_18/predictions/treshold.100000_1.table 100000 1
+
+
+

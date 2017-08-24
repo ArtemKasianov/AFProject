@@ -8,7 +8,7 @@ my $predictCodonFreqFile = $ARGV[2];
 my $trivialNamesFile = $ARGV[3];
 my $outBeforeFile = $ARGV[4];
 my $outAfterFile = $ARGV[5];
-
+my $predictFile = $ARGV[6];
 
 
 
@@ -222,7 +222,7 @@ for(my $i = 0;$i <= $#allAth;$i++ )
 	    
 	}
     }
-    $orthologGraphIn->InitalizePredictTable("predict.table");
+    $orthologGraphIn->InitalizePredictTable("$predictFile");
     $orthologGraphIn->RemoveEdgesWithWeightByPredictionTable();
     
     

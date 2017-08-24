@@ -185,12 +185,12 @@ for(my $j = 0;$j <= 9;$j++)
 {
     system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.expression.filtered.predict $fescExpressionFile results_treshold_$identTreshold/data_for_learning/folds/fold_$j.orthopairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/fold_$j.expression.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.expression.pairs");
     system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.expression.filtered.predict $fescExpressionFile results_treshold_$identTreshold/data_for_learning/virtual_OG/virtual.orthogroup.fold_$j.pairs.list 0 0 results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.expression.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.expression.pairs");
-    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/fold_$j.expression.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.expression.pairs results_treshold_$identTreshold/training/expression/fold_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.expression.predictions");
-    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.expression.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.expression.pairs results_treshold_$identTreshold/training/expression/fold_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.negative.orthopairs.expression.predictions");
+    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/fold_$j.expression.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.expression.pairs results_treshold_$identTreshold/training/expression/folds_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.expression.predictions");
+    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.expression.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.expression.pairs results_treshold_$identTreshold/training/expression/folds_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.negative.orthopairs.expression.predictions");
     
 }
 
-system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.expression.filtered.predict $fescExpressionFile others.pairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/others.expression.svm results_treshold_$identTreshold/data_for_learning/svm/others.expression.pairs");
+system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.expression.filtered.predict $fescExpressionFile results_treshold_$identTreshold/data_for_learning/others.pairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/others.expression.svm results_treshold_$identTreshold/data_for_learning/svm/others.expression.pairs");
 system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/others.expression.svm results_treshold_$identTreshold/data_for_learning/svm/others.expression.pairs results_treshold_$identTreshold/training/expression/folds_all/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/others.expression.predictions");
 
 
@@ -198,17 +198,17 @@ system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_
 
 for(my $j = 0;$j <= 9;$j++)
 {
-    system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile results_treshold_$identTreshold/data_for_learning/folds/fold_$j.orthopairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.pairs");
-    system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile results_treshold_$identTreshold/data_for_learning/virtual_OG/virtual.orthogroup.fold_$j.pairs.list 0 0 results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.pairs");
-    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.pairs results_treshold_$identTreshold/training/codonFreq/fold_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.codonFreq.predictions");
-    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.pairs results_treshold_$identTreshold/training/codonFreq/fold_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.negative.orthopairs.codonFreq.predictions");
+    system("perl GenerateSVMFile.codonFreq.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile results_treshold_$identTreshold/data_for_learning/folds/fold_$j.orthopairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.pairs");
+    system("perl GenerateSVMFile.codonFreq.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile results_treshold_$identTreshold/data_for_learning/virtual_OG/virtual.orthogroup.fold_$j.pairs.list 0 0 results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.pairs");
+    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/fold_$j.codonFreq.pairs results_treshold_$identTreshold/training/codonFreq/folds_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.codonFreq.predictions");
+    system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/virtual.orthogroup.fold_$j.codonFreq.pairs results_treshold_$identTreshold/training/codonFreq/folds_$j/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/fold_$j.negative.orthopairs.codonFreq.predictions");
     
 }
 
-system("perl GenerateSVMFile.expression.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile others.pairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.pairs");
+system("perl GenerateSVMFile.codonFreq.pairs.pl results_treshold_$identTreshold/data_for_learning/ath.codonFreq.filtered.predict $fescCodonFreqFile results_treshold_$identTreshold/data_for_learning/others.pairs 0 0 results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.pairs");
 system("python PredictByModelXGBoost.10.py results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.svm results_treshold_$identTreshold/data_for_learning/svm/others.codonFreq.pairs results_treshold_$identTreshold/training/codonFreq/folds_all/model/model_1_1_1_20.test 80 >results_treshold_$identTreshold/predictions/others.codonFreq.predictions");
 
-$strCat = "cat";
+my $strCat = "cat";
 my $strCatPositive = "cat";
 my $strCatNegative = "cat";
 for(my $j = 0;$j <= 9;$j++)
@@ -231,6 +231,9 @@ $strCatPositive = "cat";
 $strCatNegative = "cat";
 for(my $j = 0;$j <= 9;$j++)
 {
+    $strCat = $strCat." results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.expression.predictions";
+    $strCat = $strCat." results_treshold_$identTreshold/predictions/fold_$j.negative.orthopairs.expression.predictions";
+    
     $strCatPositive = $strCatPositive." results_treshold_$identTreshold/predictions/fold_$j.positive.orthopairs.expression.predictions";
     $strCatNegative = $strCatNegative." results_treshold_$identTreshold/predictions/fold_$j.negative.orthopairs.expression.predictions";
 }
@@ -241,13 +244,13 @@ $strCatNegative = $strCatNegative." >results_treshold_$identTreshold/predictions
 system("$strCat");
 system("$strCatPositive");
 system("$strCatNegative");
-
+#
 system("perl CreateTableExpCodonFreq.pl results_treshold_$identTreshold/predictions/positive.expression.predictions results_treshold_$identTreshold/predictions/positive.codonFreq.predictions results_treshold_$identTreshold/predictions/positive.expressionCodonFreq.predictions");
 system("perl CreateTableExpCodonFreq.pl results_treshold_$identTreshold/predictions/negative.expression.predictions results_treshold_$identTreshold/predictions/negative.codonFreq.predictions results_treshold_$identTreshold/predictions/negative.expressionCodonFreq.predictions");
 system("python svm-pipe-part1.py results_treshold_$identTreshold/predictions/positive.expressionCodonFreq.predictions results_treshold_$identTreshold/predictions/negative.expressionCodonFreq.predictions results_treshold_$identTreshold/predictions/treshold.table");
 
 mkdir("results_treshold_$identTreshold/graphs");
 mkdir("results_treshold_$identTreshold/graphs/graphviz");
-system("perl PrintOrthogroupsAfterCutByTreshold.beforeAfterCut.pl results_treshold_$identTreshold/data_for_learning/Ath_vs_Fesc.gt$identTreshold.ident results_treshold_$identTreshold/predictions/expression.predictions results_treshold_$identTreshold/predictions/codonFreq.predictions $trivialNamesFile results_treshold_$identTreshold/graphs/graphviz");
-system("perl CountOrthogroupsDistrAfterCutByTreshold.beforeAfterCut.pl results_treshold_$identTreshold/data_for_learning/Ath_vs_Fesc.gt$identTreshold.ident results_treshold_$identTreshold/predictions/expression.predictions results_treshold_$identTreshold/predictions/codonFreq.predictions $trivialNamesFile results_treshold_$identTreshold/graphs/beforeCut.stats results_treshold_$identTreshold/graphs/afterCut.stats");
+system("perl PrintOrthogroupsAfterCutByTreshold.beforeAfterCut.pl results_treshold_$identTreshold/data_for_learning/Ath_vs_Fesc.gt$identTreshold.ident results_treshold_$identTreshold/predictions/expression.predictions results_treshold_$identTreshold/predictions/codonFreq.predictions $trivialNamesFile results_treshold_$identTreshold/graphs/graphviz results_treshold_$identTreshold/predictions/treshold.table");
+system("perl CountOrthogroupsDistrAfterCutByTreshold.beforeAfterCut.pl results_treshold_$identTreshold/data_for_learning/Ath_vs_Fesc.gt$identTreshold.ident results_treshold_$identTreshold/predictions/expression.predictions results_treshold_$identTreshold/predictions/codonFreq.predictions $trivialNamesFile results_treshold_$identTreshold/graphs/beforeCut.stats results_treshold_$identTreshold/graphs/afterCut.stats results_treshold_$identTreshold/predictions/treshold.table");
 

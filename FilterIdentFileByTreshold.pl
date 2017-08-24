@@ -22,7 +22,7 @@ while(my $input = <FTR>)
     my $fescNam = $arrInp[1];
     my $identVal = $arrInp[2];
     
-    if($identFile >= $treshold)
+    if($identVal >= $treshold)
     {
         print FTW "$input\n";
     }

@@ -58,7 +58,7 @@ for(my $i = 0;$i <= $#arrPairs;$i++)
     my $currPair = $arrPairs[$i];
     
     die if(not exists $expressionPairs{"$currPair"});
-    die if(not exists $codonFreqPairs{"$currPair"});
+    die("$currPair\n") if(not exists $codonFreqPairs{"$currPair"});
     
     my $expressionVal = $expressionPairs{"$currPair"};
     my $codonFreqVal = $codonFreqPairs{"$currPair"};
