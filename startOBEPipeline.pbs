@@ -4,25 +4,45 @@
 #PBS -d .
 
 date >process.date
-perl OBEPipeline.pl 18 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.18.stdout 2>>out.18.stderr
-perl OBEPipeline.pl 20 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.20.stdout 2>>out.20.stderr
-perl OBEPipeline.pl 21 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.21.stdout 2>>out.21.stderr
-perl OBEPipeline.pl 22 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.22.stdout 2>>out.22.stderr
-perl OBEPipeline.pl 23 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.23.stdout 2>>out.23.stderr
-perl OBEPipeline.pl 24 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.24.stdout 2>>out.24.stderr
-perl OBEPipeline.pl 25 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.25.stdout 2>>out.25.stderr
-perl OBEPipeline.pl 26 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.26.stdout 2>>out.26.stderr
-perl OBEPipeline.pl 27 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.27.stdout 2>>out.27.stderr
-perl OBEPipeline.pl 28 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.28.stdout 2>>out.28.stderr
-perl OBEPipeline.pl 29 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.29.stdout 2>>out.29.stderr
-perl OBEPipeline.pl 30 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.30.stdout 2>>out.30.stderr
-perl OBEPipeline.pl 31 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.31.stdout 2>>out.31.stderr
-perl OBEPipeline.pl 32 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.32.stdout 2>>out.32.stderr
-perl OBEPipeline.pl 33 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.33.stdout 2>>out.33.stderr
-perl OBEPipeline.pl 34 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.34.stdout 2>>out.34.stderr
-perl OBEPipeline.pl 35 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.35.stdout 2>>out.35.stderr
-perl OBEPipeline.pl 36 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.36.stdout 2>>out.36.stderr
-perl OBEPipeline.pl 37 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.37.stdout 2>>out.37.stderr
+perl OBEPipeline.pl 38 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.38.stdout 2>out.38.stderr
+perl OBEPipeline.pl 18 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.18.stdout 2>out.18.stderr
+perl OBEPipeline.pl 19 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.19.stdout 2>out.19.stderr
+perl OBEPipeline.pl 20 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.20.stdout 2>out.20.stderr
+perl OBEPipeline.pl 21 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.21.stdout 2>out.21.stderr
+perl OBEPipeline.pl 22 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.22.stdout 2>out.22.stderr
+perl OBEPipeline.pl 23 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.23.stdout 2>out.23.stderr
+perl OBEPipeline.pl 24 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.24.stdout 2>out.24.stderr
+perl OBEPipeline.pl 25 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.25.stdout 2>out.25.stderr
+perl OBEPipeline.pl 26 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.26.stdout 2>out.26.stderr
+perl OBEPipeline.pl 27 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.27.stdout 2>out.27.stderr
+perl OBEPipeline.pl 28 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.28.stdout 2>out.28.stderr
+perl OBEPipeline.pl 29 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.29.stdout 2>out.29.stderr
+perl OBEPipeline.pl 30 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.30.stdout 2>out.30.stderr
+perl OBEPipeline.pl 31 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.31.stdout 2>out.31.stderr
+perl OBEPipeline.pl 32 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.32.stdout 2>out.32.stderr
+perl OBEPipeline.pl 33 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.33.stdout 2>out.33.stderr
+perl OBEPipeline.pl 34 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.34.stdout 2>out.34.stderr
+perl OBEPipeline.pl 35 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.35.stdout 2>out.35.stderr
+perl OBEPipeline.pl 36 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.36.stdout 2>out.36.stderr
+perl OBEPipeline.pl 37 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.37.stdout 2>out.37.stderr
+perl OBEPipeline.pl 39 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.39.stdout 2>out.39.stderr
+perl OBEPipeline.pl 40 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.40.stdout 2>out.40.stderr
+perl OBEPipeline.pl 41 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.41.stdout 2>out.41.stderr
+perl OBEPipeline.pl 42 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.42.stdout 2>out.42.stderr
+perl OBEPipeline.pl 43 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.43.stdout 2>out.43.stderr
+perl OBEPipeline.pl 44 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.44.stdout 2>out.44.stderr
+perl OBEPipeline.pl 45 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.45.stdout 2>out.45.stderr
+perl OBEPipeline.pl 46 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.46.stdout 2>out.46.stderr
+perl OBEPipeline.pl 47 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.47.stdout 2>out.47.stderr
+perl OBEPipeline.pl 48 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.48.stdout 2>out.48.stderr
+perl OBEPipeline.pl 49 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.49.stdout 2>out.49.stderr
+perl OBEPipeline.pl 50 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.50.stdout 2>out.50.stderr
+perl OBEPipeline.pl 17 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.17.stdout 2>out.17.stderr
+perl OBEPipeline.pl 16 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.16.stdout 2>out.16.stderr
+perl OBEPipeline.pl 15 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.15.stdout 2>out.15.stderr
+perl OBEPipeline.pl 14 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.14.stdout 2>out.14.stderr
+perl OBEPipeline.pl 13 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.13.stdout 2>out.13.stderr
+perl OBEPipeline.pl 12 Ath_vs_Fesc.ident Ath_TGR_NotNorm.txt Fes_TGR_NotNorm.txt tair.cf fesc.cf Ath_mRNA.filtered.txt orthoMCL.orthopairs.list Gene_Names.new.txt >out.12.stdout 2>out.12.stderr
 date >>process.date
 
 
